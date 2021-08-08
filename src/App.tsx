@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import './App.scss';
-import Navbar from './components/navbar/navbar';
+import Home from './components/home/home';
 import Layout from './components/layout/layout';
 
 function App() {
