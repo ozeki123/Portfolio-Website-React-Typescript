@@ -39,11 +39,37 @@
                     z-index: 1;
                     height: 90%;
 
-                    .project-text-contents{
-                        position: relative;
-                        overflow: hidden;
-                        
+                    .project-text-area{
+                        // height: 100px;
+                        .project-text-contents{
+                            position: relative;
+                            overflow: hidden;
+                            line-height: 0;
+
+                            .sub-header{
+                                display: flex;
+                                width: 13rem;
+                                justify-content: space-between;
+                                position: relative;
+                                left: 1.5rem;
+                                
+
+                                .rectangle{
+                                    width: 9px;
+                                    height: 55px;
+                                    background-color: #C4C4C4;
+                                    position: relative;
+                                    // bottom: 4px;
+                                }
+                                
+                            }
+
+                            
+                        }
+
                     }
+
+                    
 
 
                     h1{
@@ -55,9 +81,9 @@
                     }
                     p{
                         position: relative;
-                        bottom: 1rem;
-                        line-height: 1.5rem;
-                        letter-spacing: 0.2px;
+                        bottom: 0.75rem;
+                        line-height: 1rem;
+                        font-size: 0.8rem;
                     }
                 }
 
@@ -80,9 +106,15 @@
                         background: white;
                     }
                     .project-image{
-                        
+                        transition: 0.7s ease-in-out;
+
+                            &:hover{
+                                transform: scale(1.01);
+                                opacity: 90%;
+                            }
                         img{
                             width: 100%;
+                            
                             
                         }
                     }

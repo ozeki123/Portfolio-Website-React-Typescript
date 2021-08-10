@@ -1,15 +1,17 @@
-import React , { useRef, useEffect } from 'react';
+import React , { useRef, useEffect, useState } from 'react';
 import './layout.scss';
 import StrideImage from '../../assets/images/StrideImage.jpg';
 import { gsap } from 'gsap';
 import CSSRulePlugin from 'gsap/CSSRulePlugin';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import useWindowSize from './useWindowSize';
 
 gsap.registerPlugin(ScrollTrigger, CSSRulePlugin);
 
 const Layout = () => {
     let imageRef = useRef<HTMLImageElement>(null);
-    let container = useRef<HTMLDivElement>(null);
+    // const container = useRef<HTMLDivElement>(null);
+    let container = useRef<HTMLImageElement>(null);
     let imageReveal = CSSRulePlugin.getRule(".layout-container .layout-contents .project-container .project-contents .about-right:after");  
     let textContainer = useRef([]);
     let headerRef = useRef<HTMLDivElement>(null);
@@ -19,6 +21,8 @@ const Layout = () => {
     let tl = gsap.timeline();
     let t2 = gsap.timeline();
 
+    // const size = useWindowSize();
+
     useEffect(() => {
         console.log(imageRef);
         console.log(container);
@@ -27,10 +31,10 @@ const Layout = () => {
         console.log(headerTest);
         console.log(textContainer);
 
-        document.body.style.height = `${container.current?.getBoundingClientRect().height}px`
+        // document.body.style.height = `${container.current?.getBoundingClientRect().height}px`
 
 
-        tl.to(container, {
+        tl.to(container.current, {
             duration: 0.1, 
             css: { visibility: "visible" }
         })
@@ -51,7 +55,7 @@ const Layout = () => {
             ease: "Power2.easeOut",
             delay: 0.4,
         })
-            t2.from(imageRef, {
+            t2.from(imageRef.current, {
                 scrollTrigger: {
                     trigger: container.current,
                     start: "top center",
@@ -85,17 +89,14 @@ const Layout = () => {
             duration: 1.9,
             y: 90,
             ease: "Power4.easeOut"
-        })
-        
-                    
-        
+        })                                
     })
         return (
-            <div className="layout-container" ref={el => (container = el)}>
+            <div className="layout-container" ref={container}>
                 <div className="layout-contents">
                     <div className="header-container">
                         <div className="header-contents">
-                            <div className="header-left" ref={el => (headerRef = el)}>
+                            <div className="header-left" ref={headerRef}>
                                 <p ref={element => {headerTest.current[0] = element;}}>andrew ozeki</p>
                                 <p ref={element => {headerTest.current[1] = element;}}>FRONT END DEVELOPER & UI DESIGNER</p>
                             </div>
@@ -109,15 +110,22 @@ const Layout = () => {
                     <div className="project-container">
                         <div className="project-contents">
                             <div className="project-text">
-                                <div className="project-text-contents">
-                                    <h1 ref={element => {titleRef.current[0] = element;}}>Stride & Co</h1>
-                                    <p ref={element => {textContainer.current[0] = element;}}>Website concept built in Angular</p>
-                                    <a href="#"><p ref={element => {textContainer.current[1] = element;}}>Visit Website</p></a>
+                                <div className="project-text-area">
+                                    <div className="project-text-contents">
+                                        <h1 ref={element => {titleRef.current[0] = element;}}>Stride & Co</h1>
+                                        <div className="sub-header">
+                                            <div className="rectangle" ref={element => {textContainer.current[0] = element;}}></div>
+                                            <div className="sub-header-text">
+                                                <p ref={element => {textContainer.current[1] = element;}}>Website concept built in Angular</p>
+                                                <a href="#"><p ref={element => {textContainer.current[2] = element;}}>Visit Website</p></a>
+                                            </div>
+                                        </div>                        
+                                    </div>
                                 </div>
                             </div>
                             <div className="about-right">
                                 <div className="project-image">
-                                    <img ref={el => imageRef = el} src={StrideImage}/>
+                                    <img ref={imageRef} src={StrideImage}/>
                                 </div>
                             </div>
                         </div> 
@@ -125,11 +133,15 @@ const Layout = () => {
                     <div className="project-container">
                         <div className="project-contents">
                             <div className="project-text">
-                                <div className="project-text-contents">
-                                    <h1>Stride & Co</h1>
-                                    <p>Website concept built in Angular</p>
-                                    <a href="#"><p>Visit Website</p></a>
+                                <div className="project-text-area">
+                                    <div className="project-text-contents">
+                                        <div className="rectangle"></div>
+                                        <h1>Stride & Co</h1>
+                                        <p>Website concept built in Angular</p>
+                                        <a href="#"><p>Visit Website</p></a>
+                                    </div>
                                 </div>
+                                
                             </div>
                             <div className="about-right">
                                 <div className="project-image">
